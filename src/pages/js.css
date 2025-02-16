@@ -1,0 +1,76 @@
+/* Animations */
+@keyframes slide {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(0); }
+  }
+  
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+  }
+  
+  .animate-pulse {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+  
+  .animate-slide {
+    animation: slide 1s ease-in-out;
+  }
+  
+  /* Scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: #111827;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: #374151;
+    border-radius: 4px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: #4b5563;
+  }
+  
+  /* Text Shadow */
+  .text-shadow {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  }
+  
+  /* General Styles */
+  body {
+    color: #e5e7eb;
+    background-color: #111827;
+  }
+  
+  pre {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    tab-size: 2;
+  }
+  
+  /* Syntax Highlighting */
+  .token.comment {
+    color: #6b7280;
+  }
+  
+  .token.keyword {
+    color: #f59e0b;
+  }
+  
+  .token.function {
+    color: #3b82f6;
+  }
+  
+  .token.string {
+    color: #10b981;
+  }
+  
+  .token.number {
+    color: #8b5cf6;
+  }

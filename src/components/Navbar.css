@@ -1,0 +1,31 @@
+/* Animation for the text */
+.animated-text {
+    font-size: 1.125rem; /* Equivalent to text-lg in Tailwind */
+    font-weight: 300; /* Equivalent to font-medium in Tailwind */
+    overflow: hidden; /* Hide overflow */
+    white-space: nowrap; /* Keep text in one line */
+    font-style: italic;
+    position: relative;
+    flex: 1; /* Take up remaining space */
+    margin: 0 10px 0 200px; /* Add some margin to prevent overlap */
+  }
+  
+  /* Blinking cursor effect */
+  .cursor {
+    display: inline-block;
+    width: 2px;
+    height: 1.2rem;
+    background-color: white;
+    margin-left: 2px;
+    animation: blink-caret 0.75s step-end infinite;
+  }
+  
+  /* Keyframes for blinking cursor */
+  @keyframes blink-caret {
+    from, to {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
