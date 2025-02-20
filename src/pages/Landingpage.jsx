@@ -1,7 +1,7 @@
 import React from 'react';
-import Navbar from '../components/Navbar';
-import './landingpage.css'; // Import custom CSS for animations
-import { Link } from 'react-router-dom';
+
+import './Landingpage.css'; // Import custom CSS for animations
+
 import Header from '../components/Header';
 import StarTrail from '../components/StarTrail';
 
