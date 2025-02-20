@@ -1,4 +1,32 @@
 /* landingpage.css */
+.star-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+.star {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  
+  border-radius: 50%;
+  animation: twinkle 1s ease-out forwards;
+ 
+}
+
+@keyframes twinkle {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0) translate(50px, 50px);
+  }
+}
 
 /* Video Card Container */
 .video-card {

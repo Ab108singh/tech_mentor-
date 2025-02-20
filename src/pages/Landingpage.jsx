@@ -2,26 +2,10 @@ import React from 'react';
 import Navbar from '../components/Navbar';
 import './landingpage.css'; // Import custom CSS for animations
 import { Link } from 'react-router-dom';
+import Header from '../components/Header';
+import StarTrail from '../components/StarTrail';
 
 const Landingpage = () => {
-  // Array of button labels (web development topics)
-  const buttonLabels = [
-    'HTML',
-    'CSS',
-    'JavaScript',
-    'React',
-    'Node.js',
-    'Express',
-    'MongoDB',
-    'Tailwind CSS',
-    'Git & GitHub',
-    'APIs',
-    'Responsive Design',
-    'Web Security',
-    'Deployment',
-    'Debugging',
-  ];
-
   // Array of YouTube video links, titles, and IDs
   const youtubeVideos = [
     {
@@ -41,21 +25,8 @@ const Landingpage = () => {
   return (
     <div className="font-sans">
       {/* Header */}
-      <header className="bg-gray-900 text-white">
-        <Navbar />
-        {/* Buttons Section */}
-        <div className="flex justify-start gap-2 p-3 bg-gray-800 overflow-x-auto">
-          {buttonLabels.map((label, index) => (
-            <Link
-            to={'/'+label.toLowerCase()}
-              key={index}
-              className="px-3 py-1 text-xs font-medium bg-gray-700 text-white rounded-lg hover:bg-gray-600 transition duration-300 shadow-md"
-            >
-              {label}
-            </Link>
-          ))}
-        </div>
-      </header>
+      <StarTrail col='white' sadow='lightgray'/>
+      <Header />
 
       {/* Hero Section */}
       <section className="bg-gray-900 text-white py-20">
@@ -71,28 +42,28 @@ const Landingpage = () => {
       </section>
 
       {/* Features Section (Mid Section) */}
-      <section className="bg-gray-100 py-16">
+      <section className="bg-gray-800 py-16">
         <div className="container mx-auto text-center">
-          <h2 className="text-3xl font-bold mb-8">What You'll Learn</h2>
+          <h2 className="text-3xl font-bold mb-8 text-white">What You'll Learn</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Feature 1 */}
-            <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
-              <h3 className="text-xl font-semibold mb-4">Frontend Development</h3>
-              <p className="text-gray-600">
+            <div className="bg-gray-700 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+              <h3 className="text-xl font-semibold mb-4 text-white">Frontend Development</h3>
+              <p className="text-gray-300">
                 Master HTML, CSS, JavaScript, and modern frameworks like React to build stunning user interfaces.
               </p>
             </div>
             {/* Feature 2 */}
-            <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
-              <h3 className="text-xl font-semibold mb-4">Backend Development</h3>
-              <p className="text-gray-600">
+            <div className="bg-gray-700 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+              <h3 className="text-xl font-semibold mb-4 text-white">Backend Development</h3>
+              <p className="text-gray-300">
                 Learn Node.js, Express, and MongoDB to create powerful and scalable backend systems.
               </p>
             </div>
             {/* Feature 3 */}
-            <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
-              <h3 className="text-xl font-semibold mb-4">Full-Stack Skills</h3>
-              <p className="text-gray-600">
+            <div className="bg-gray-700 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+              <h3 className="text-xl font-semibold mb-4 text-white">Full-Stack Skills</h3>
+              <p className="text-gray-300">
                 Combine frontend and backend skills to become a full-stack developer and build complete web applications.
               </p>
             </div>
@@ -101,9 +72,9 @@ const Landingpage = () => {
       </section>
 
       {/* YouTube Videos Section */}
-      <section className="bg-white py-16">
+      <section className="bg-gray-800 py-16">
         <div className="container mx-auto text-center">
-          <h2 className="text-3xl font-bold mb-8">My YouTube Videos</h2>
+          <h2 className="text-3xl font-bold mb-8 text-white">My YouTube Videos</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {youtubeVideos.map((video, index) => (
               <a

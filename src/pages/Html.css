@@ -1,17 +1,19 @@
-
-html{
-    scroll-behavior: smooth;
+/* Smooth transitions for sidebar */
+aside {
+  transition: top 0.3s ease, height 0.3s ease;
 }
 
-/* Hide scrollbar for Chrome, Safari and Opera */
-aside::-webkit-scrollbar {
-    display: none;
-  }
-  
-  /* Hide scrollbar for IE, Edge and Firefox */
-  aside {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
-  }
+/* Scroll margin for sections */
+section > div {
+  scroll-margin-top: 7rem;
+}
 
-  
+/* Hide scrollbar */
+aside::-webkit-scrollbar {
+  display: none;
+}
+
+aside {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}

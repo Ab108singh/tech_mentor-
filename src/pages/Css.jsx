@@ -1,11 +1,11 @@
 import React, { useRef, useState, useEffect } from 'react';
-import Navbar from '../components/Navbar';
-import './css.css';
+import Header from '../components/Header';
+import StarTrail from '../components/StarTrail';
 
 const Css = () => {
   const [isSidebarFixed, setIsSidebarFixed] = useState(false);
   const sidebarRef = useRef(null);
-  const headerRef = useRef(null);
+  const sentinelRef = useRef(null); // Changed from headerRef to sentinelRef
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -15,9 +15,9 @@ const Css = () => {
       { root: null, rootMargin: '0px', threshold: 0 }
     );
 
-    if (headerRef.current) observer.observe(headerRef.current);
+    if (sentinelRef.current) observer.observe(sentinelRef.current);
     return () => {
-      if (headerRef.current) observer.unobserve(headerRef.current);
+      if (sentinelRef.current) observer.unobserve(sentinelRef.current);
     };
   }, []);
 
@@ -45,21 +45,9 @@ const Css = () => {
   return (
     <div className="font-sans bg-gray-900 min-h-screen">
       {/* Header */}
-      <header ref={headerRef} className="w-full bg-gradient-to-r from-gray-900 to-gray-800 text-gray-200 z-50 shadow-xl border-b border-gray-700">
-        <Navbar />
-        <div className="flex justify-start gap-2 p-3 bg-gray-800/90 overflow-x-auto">
-          {cssTopics.map((topic, index) => (
-            <button
-              key={index}
-              className="px-4 py-1.5 text-xs font-medium bg-gray-700/80 hover:bg-gray-600/90 transition-all duration-300 rounded-lg shadow-md hover:scale-105 text-gray-200"
-              onClick={() => scrollToSection(topic.ref)}
-            >
-              {topic.title}
-            </button>
-          ))}
-        </div>
-      </header>
-
+      <StarTrail col='#f78d02' sadow='#f76902'/>
+      <Header/>
+      <div ref={sentinelRef} className="absolute top-29 h-1 w-full" />
       {/* Sidebar */}
       <aside
         ref={sidebarRef}
@@ -67,8 +55,7 @@ const Css = () => {
           isSidebarFixed 
             ? 'fixed top-0 h-screen' 
             : 'absolute top-29 h-[calc(100vh-7rem)]'
-        } left-0 w-64 bg-gray-900 text-gray-300 overflow-y-auto z-40 
-           border-r border-gray-700`}
+        } left-0 w-64 bg-gray-900 text-gray-300 overflow-y-auto z-40 border-r border-gray-700`}
       >
         <div className="p-4">
           <h2 className="text-xl font-bold mb-4 border-b border-gray-700 pb-2 text-gray-200">
@@ -79,10 +66,9 @@ const Css = () => {
               <button
                 key={index}
                 onClick={() => scrollToSection(topic.ref)}
-                className="w-full text-left px-4 py-3 text-sm hover:bg-gray-800 rounded-lg transition-all 
-                         duration-300 mb-2 hover:translate-x-2 group"
+                className="w-full text-left px-4 py-3 text-sm hover:bg-gray-800 rounded-lg transition-all duration-300 mb-2 hover:translate-x-2 group"
               >
-                <span className="group-hover:text-purple-400 transition-colors">
+                <span className="group-hover:text-orange-400 transition-colors">
                   {topic.title}
                 </span>
               </button>
@@ -99,11 +85,9 @@ const Css = () => {
               <div
                 key={index}
                 ref={topic.ref}
-                className="bg-gray-800 p-8 rounded-xl shadow-2xl mb-8 transition-all duration-300 
-                         hover:shadow-3xl hover:-translate-y-2 border border-gray-700"
+                className="bg-gray-800 p-8 rounded-xl shadow-2xl mb-8 transition-all duration-300 hover:shadow-3xl hover:-translate-y-2 border border-gray-700"
               >
-                <h2 className="text-3xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-purple-400 
-                              bg-clip-text text-transparent">
+                <h2 className="text-3xl font-bold mb-6 bg-gradient-to-r from-orange-400 via-amber-400 to-yellow-400 bg-clip-text text-transparent">
                   {topic.title}
                 </h2>
                 <div className="text-gray-300 space-y-4">
@@ -128,8 +112,8 @@ const getCssTopicContent = (title) => {
             It controls layout, colors, fonts, and responsive behavior.
           </p>
           <div className="mt-6">
-            <h3 className="text-xl font-semibold mb-3 text-blue-400">Basic Syntax:</h3>
-            <pre className="bg-gray-900 text-blue-300 p-5 rounded-xl overflow-x-auto border border-gray-700">
+            <h3 className="text-xl font-semibold mb-3 text-orange-400">Basic Syntax:</h3>
+            <pre className="bg-gray-900 text-orange-300 p-5 rounded-xl overflow-x-auto border border-gray-700">
 {`selector {
   property: value;
   /* This is a CSS comment */
@@ -147,8 +131,8 @@ const getCssTopicContent = (title) => {
             element names to complex attribute selectors.
           </p>
           <div className="mt-6">
-            <h3 className="text-xl font-semibold mb-3 text-blue-400">Common Selectors:</h3>
-            <pre className="bg-gray-900 text-blue-300 p-5 rounded-xl overflow-x-auto border border-gray-700">
+            <h3 className="text-xl font-semibold mb-3 text-orange-400">Common Selectors:</h3>
+            <pre className="bg-gray-900 text-orange-300 p-5 rounded-xl overflow-x-auto border border-gray-700">
 {`/* Element selector */
 div { ... }
 
@@ -176,12 +160,12 @@ button:hover { ... }`}
             It consists of content, padding, border, and margin.
           </p>
           <div className="mt-6">
-            <h3 className="text-xl font-semibold mb-3 text-blue-400">Visualization:</h3>
+            <h3 className="text-xl font-semibold mb-3 text-orange-400">Visualization:</h3>
             <div className="flex justify-center items-center p-6 bg-gray-900 rounded-xl border border-gray-700">
-              <div className="w-48 h-48 bg-purple-900 p-4 border-4 border-blue-800 m-8 relative">
+              <div className="w-48 h-48 bg-purple-900 p-4 border-4 border-orange-800 m-8 relative">
                 <div className="absolute -top-4 left-0 text-sm text-gray-400">Margin</div>
                 <div className="absolute -inset-4 border-2 border-dashed border-gray-600"></div>
-                <div className="h-full w-full bg-blue-900 p-4">
+                <div className="h-full w-full bg-orange-900 p-4">
                   <div className="h-full w-full bg-gray-800 flex items-center justify-center text-gray-400">
                     Content
                   </div>
@@ -196,11 +180,11 @@ button:hover { ... }`}
       return (
         <>
           <p className="text-lg">
-            Flexbox provides efficient way to layout, align, and distribute space among items in a container.
+            Flexbox provides an efficient way to layout, align, and distribute space among items in a container.
           </p>
           <div className="mt-6">
-            <h3 className="text-xl font-semibold mb-3 text-blue-400">Example:</h3>
-            <pre className="bg-gray-900 text-blue-300 p-5 rounded-xl overflow-x-auto border border-gray-700">
+            <h3 className="text-xl font-semibold mb-3 text-orange-400">Example:</h3>
+            <pre className="bg-gray-900 text-orange-300 p-5 rounded-xl overflow-x-auto border border-gray-700">
 {`.container {
   display: flex;
   justify-content: center;
@@ -210,7 +194,7 @@ button:hover { ... }`}
             </pre>
             <div className="mt-4 flex justify-center gap-4 p-4 bg-gray-900 rounded-lg border border-gray-700">
               <div className="w-12 h-12 bg-purple-600 rounded-lg animate-pulse"></div>
-              <div className="w-12 h-12 bg-blue-600 rounded-lg animate-pulse delay-100"></div>
+              <div className="w-12 h-12 bg-orange-600 rounded-lg animate-pulse delay-100"></div>
               <div className="w-12 h-12 bg-pink-600 rounded-lg animate-pulse delay-200"></div>
             </div>
           </div>
@@ -225,8 +209,8 @@ button:hover { ... }`}
             that offers precise control over web page layouts.
           </p>
           <div className="mt-6">
-            <h3 className="text-xl font-semibold mb-3 text-blue-400">Example:</h3>
-            <pre className="bg-gray-900 text-blue-300 p-5 rounded-xl overflow-x-auto border border-gray-700">
+            <h3 className="text-xl font-semibold mb-3 text-orange-400">Example:</h3>
+            <pre className="bg-gray-900 text-orange-300 p-5 rounded-xl overflow-x-auto border border-gray-700">
 {`.container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -235,7 +219,7 @@ button:hover { ... }`}
             </pre>
             <div className="mt-4 grid grid-cols-3 gap-4 p-4 bg-gray-900 rounded-lg border border-gray-700">
               {[...Array(6)].map((_, i) => (
-                <div key={i} className="h-12 bg-gradient-to-r from-blue-700 to-purple-700 rounded-lg"></div>
+                <div key={i} className="h-12 bg-gradient-to-r from-orange-600 to-amber-600 rounded-lg"></div>
               ))}
             </div>
           </div>
@@ -246,25 +230,23 @@ button:hover { ... }`}
       return (
         <>
           <p className="text-lg">
-            CSS transitions enable smooth changes between property values over a
-            specified duration.
+            CSS transitions enable smooth changes between property values over a specified duration.
           </p>
           <div className="mt-6">
-            <h3 className="text-xl font-semibold mb-3 text-blue-400">Example:</h3>
-            <pre className="bg-gray-900 text-blue-300 p-5 rounded-xl overflow-x-auto border border-gray-700">
+            <h3 className="text-xl font-semibold mb-3 text-orange-400">Example:</h3>
+            <pre className="bg-gray-900 text-orange-300 p-5 rounded-xl overflow-x-auto border border-gray-700">
 {`button {
   transition: all 0.3s ease;
-  background: #2563eb;
+  background: #ea580c;
 }
 
 button:hover {
-  background: #7c3aed;
+  background: #f97316;
   transform: scale(1.1);
 }`}
             </pre>
             <div className="mt-4 flex justify-center">
-              <button className="px-6 py-3 bg-blue-600 text-white rounded-lg transition-all 
-                               duration-300 hover:bg-purple-600 hover:scale-110">
+              <button className="px-6 py-3 bg-orange-600 text-white rounded-lg transition-all duration-300 hover:bg-amber-600 hover:scale-110">
                 Hover Me
               </button>
             </div>
@@ -276,12 +258,11 @@ button:hover {
       return (
         <>
           <p className="text-lg">
-            CSS animations allow elements to transition between style configurations
-            using keyframes.
+            CSS animations allow elements to transition between style configurations using keyframes.
           </p>
           <div className="mt-6">
-            <h3 className="text-xl font-semibold mb-3 text-blue-400">Example:</h3>
-            <pre className="bg-gray-900 text-blue-300 p-5 rounded-xl overflow-x-auto border border-gray-700">
+            <h3 className="text-xl font-semibold mb-3 text-orange-400">Example:</h3>
+            <pre className="bg-gray-900 text-orange-300 p-5 rounded-xl overflow-x-auto border border-gray-700">
 {`@keyframes slide {
   from { transform: translateX(-100%); }
   to { transform: translateX(0); }
@@ -302,20 +283,18 @@ button:hover {
       return (
         <>
           <p className="text-lg">
-            CSS transform property lets you rotate, scale, skew, or translate elements.
+            The CSS transform property lets you rotate, scale, skew, or translate elements.
           </p>
           <div className="mt-6">
-            <h3 className="text-xl font-semibold mb-3 text-blue-400">Example:</h3>
-            <pre className="bg-gray-900 text-blue-300 p-5 rounded-xl overflow-x-auto border border-gray-700">
+            <h3 className="text-xl font-semibold mb-3 text-orange-400">Example:</h3>
+            <pre className="bg-gray-900 text-orange-300 p-5 rounded-xl overflow-x-auto border border-gray-700">
 {`.element {
   transform: rotate(45deg) scale(1.2) translateX(20px);
 }`}
             </pre>
             <div className="mt-4 flex justify-center gap-4">
-              <div className="w-12 h-12 bg-red-600 transform rotate-45 transition-transform 
-                             duration-300 hover:rotate-90"></div>
-              <div className="w-12 h-12 bg-yellow-600 transform scale-100 transition-transform 
-                             duration-300 hover:scale-125"></div>
+              <div className="w-12 h-12 bg-red-600 transform rotate-45 transition-transform duration-300 hover:rotate-90"></div>
+              <div className="w-12 h-12 bg-yellow-600 transform scale-100 transition-transform duration-300 hover:scale-125"></div>
             </div>
           </div>
         </>
@@ -325,14 +304,13 @@ button:hover {
       return (
         <>
           <p className="text-lg">
-            CSS variables (custom properties) allow you to store and reuse values
-            throughout your stylesheets.
+            CSS variables (custom properties) allow you to store and reuse values throughout your stylesheets.
           </p>
           <div className="mt-6">
-            <h3 className="text-xl font-semibold mb-3 text-blue-400">Example:</h3>
-            <pre className="bg-gray-900 text-blue-300 p-5 rounded-xl overflow-x-auto border border-gray-700">
+            <h3 className="text-xl font-semibold mb-3 text-orange-400">Example:</h3>
+            <pre className="bg-gray-900 text-orange-300 p-5 rounded-xl overflow-x-auto border border-gray-700">
 {`:root {
-  --primary-color: #2563eb;
+  --primary-color: #ea580c;
   --spacing-unit: 1rem;
 }
 
@@ -349,12 +327,11 @@ button:hover {
       return (
         <>
           <p className="text-lg">
-            Responsive design techniques ensure websites work across various screen
-            sizes using media queries and flexible layouts.
+            Responsive design techniques ensure websites work across various screen sizes using media queries and flexible layouts.
           </p>
           <div className="mt-6">
-            <h3 className="text-xl font-semibold mb-3 text-blue-400">Media Query Example:</h3>
-            <pre className="bg-gray-900 text-blue-300 p-5 rounded-xl overflow-x-auto border border-gray-700">
+            <h3 className="text-xl font-semibold mb-3 text-orange-400">Media Query Example:</h3>
+            <pre className="bg-gray-900 text-orange-300 p-5 rounded-xl overflow-x-auto border border-gray-700">
 {`@media (max-width: 768px) {
   .container {
     flex-direction: column;
@@ -372,10 +349,10 @@ button:hover {
             Pseudo-classes define special states of elements (e.g., hover, focus, active).
           </p>
           <div className="mt-6">
-            <h3 className="text-xl font-semibold mb-3 text-blue-400">Examples:</h3>
-            <pre className="bg-gray-900 text-blue-300 p-5 rounded-xl overflow-x-auto border border-gray-700">
+            <h3 className="text-xl font-semibold mb-3 text-orange-400">Examples:</h3>
+            <pre className="bg-gray-900 text-orange-300 p-5 rounded-xl overflow-x-auto border border-gray-700">
 {`a:hover { color: #ef4444; }
-input:focus { border-color: #3b82f6; }
+input:focus { border-color: #f97316; }
 li:nth-child(odd) { background: #1f2937; }`}
             </pre>
           </div>
@@ -389,8 +366,8 @@ li:nth-child(odd) { background: #1f2937; }`}
             CSS shadow properties add depth and dimension to elements with box and text shadows.
           </p>
           <div className="mt-6">
-            <h3 className="text-xl font-semibold mb-3 text-blue-400">Example:</h3>
-            <pre className="bg-gray-900 text-blue-300 p-5 rounded-xl overflow-x-auto border border-gray-700">
+            <h3 className="text-xl font-semibold mb-3 text-orange-400">Example:</h3>
+            <pre className="bg-gray-900 text-orange-300 p-5 rounded-xl overflow-x-auto border border-gray-700">
 {`.card {
   box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.3);
 }
@@ -414,19 +391,19 @@ li:nth-child(odd) { background: #1f2937; }`}
             CSS gradients create smooth transitions between multiple colors.
           </p>
           <div className="mt-6">
-            <h3 className="text-xl font-semibold mb-3 text-blue-400">Examples:</h3>
-            <pre className="bg-gray-900 text-blue-300 p-5 rounded-xl overflow-x-auto border border-gray-700">
+            <h3 className="text-xl font-semibold mb-3 text-orange-400">Examples:</h3>
+            <pre className="bg-gray-900 text-orange-300 p-5 rounded-xl overflow-x-auto border border-gray-700">
 {`.linear-gradient {
-  background: linear-gradient(45deg, #2563eb, #db2777);
+  background: linear-gradient(45deg, #ea580c, #f59e0b);
 }
 
 .radial-gradient {
-  background: radial-gradient(circle, #2563eb, #db2777);
+  background: radial-gradient(circle, #ea580c, #f59e0b);
 }`}
             </pre>
             <div className="mt-4 flex gap-4">
-              <div className="w-24 h-24 bg-gradient-to-br from-blue-600 to-pink-600 rounded-lg"></div>
-              <div className="w-24 h-24 bg-radial-gradient from-blue-600 to-pink-600 rounded-full"></div>
+              <div className="w-24 h-24 bg-gradient-to-br from-orange-600 to-amber-600 rounded-lg"></div>
+              <div className="w-24 h-24 bg-radial-gradient from-orange-600 to-amber-600 rounded-full"></div>
             </div>
           </div>
         </>
@@ -439,8 +416,8 @@ li:nth-child(odd) { background: #1f2937; }`}
             CSS architecture methodologies like BEM help create maintainable and scalable styles.
           </p>
           <div className="mt-6">
-            <h3 className="text-xl font-semibold mb-3 text-blue-400">BEM Example:</h3>
-            <pre className="bg-gray-900 text-blue-300 p-5 rounded-xl overflow-x-auto border border-gray-700">
+            <h3 className="text-xl font-semibold mb-3 text-orange-400">BEM Example:</h3>
+            <pre className="bg-gray-900 text-orange-300 p-5 rounded-xl overflow-x-auto border border-gray-700">
 {`/* Block */
 .card { ... }
 

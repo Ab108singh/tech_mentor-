@@ -1,11 +1,13 @@
 import React, { useRef, useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import './react.css';
+import Header from '../components/Header';
+import StarTrail from '../components/StarTrail';
 
 const ReactJS = () => {
   const [isSidebarFixed, setIsSidebarFixed] = useState(false);
   const sidebarRef = useRef(null);
-  const headerRef = useRef(null);
+  const sentinelRef = useRef(null); // Changed from headerRef to sentinelRef
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -15,9 +17,9 @@ const ReactJS = () => {
       { root: null, rootMargin: '0px', threshold: 0 }
     );
 
-    if (headerRef.current) observer.observe(headerRef.current);
+    if (sentinelRef.current) observer.observe(sentinelRef.current);
     return () => {
-      if (headerRef.current) observer.unobserve(headerRef.current);
+      if (sentinelRef.current) observer.unobserve(sentinelRef.current);
     };
   }, []);
 
@@ -45,20 +47,9 @@ const ReactJS = () => {
   return (
     <div className="font-sans bg-gray-900 min-h-screen">
       {/* Header */}
-      <header ref={headerRef} className="w-full bg-gradient-to-r from-gray-900 to-cyan-900 text-gray-200 z-50 shadow-xl border-b border-cyan-700">
-        <Navbar />
-        <div className="flex justify-start gap-2 p-3 bg-cyan-900/90 overflow-x-auto">
-          {reactTopics.map((topic, index) => (
-            <button
-              key={index}
-              className="px-4 py-1 text-xs font-medium bg-cyan-800/80 hover:bg-cyan-700/90 transition-all duration-300 rounded-lg shadow-md hover:scale-105 text-gray-200"
-              onClick={() => scrollToSection(topic.ref)}
-            >
-              {topic.title}
-            </button>
-          ))}
-        </div>
-      </header>
+      <StarTrail col='#05f7db' sadow='#05dff7'/>
+     <Header/>
+     <div ref={sentinelRef} className="absolute top-29 h-1 w-full" />
 
       {/* Sidebar */}
       <aside
