@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
-import './html.css'; // Include your CSS if needed
+import './Html.css'; // Include your CSS if needed
 import Header from '../components/Header';
 import StarTrail from '../components/StarTrail';
 
